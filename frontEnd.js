@@ -3,8 +3,7 @@
     console.log("testing");
 
     function addBubble(data) {
-        return "<div class='bubble'>" +
-            "<p>" + data + "</p>" + "</div>";
+        return "<div class='bubble'>" + "<p>" + data.body + "</p>" + "</div>";
     }
 
     $("#bubbleForm").submit(function( event ) {
@@ -15,12 +14,15 @@
         if (myNewBubble.length) {
             console.log(myNewBubble);
             $.post("/add", myNewBubble, function(data) {
+                //
+                console.log(data);
+                var newBubbleJson = JSON.parse(data);
                 //var newBubble = JSON.parse(data);
-                var newBubble = data;
-                    $("#bubbles").prepend(addBubble(newBubble));
+                    $("#bubbles").prepend(addBubble(newBubbleJson));
+                    $("#newBubbleInput").val("");
             });
         }
-        $("#newBubbleInput").val("");
+
     });
 
 })();

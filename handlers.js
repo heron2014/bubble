@@ -11,14 +11,25 @@ var handlers = (function() {
 
     app["POST /add"] = function(request, response) {
         var myBubble = "";
+        //var bubbles = require(__dirname + "/data.json"); //loads the array with all bubbles - tweets
+
         request.on("data", function(chunk) {
-            myBubble += chunk;
+            myBubble += chunk; //this is string because it turns bubble input box buffer into text
             console.log("*********" + myBubble);
         });
+
         request.on("end", function() {
-            response.writeHead(200, {'Content-Type': 'text/plain'});
+            //var entry = {body: myBubble, timestamp: Date.now()};
+            var entry = JSON.stringify(({body: myBubble})) + "\n";
+            console.log(entry);
+            //bubbles.push(entry); //adds new bubble to bubbles array
+            fs.appendFile("data.json", entry, function(err) { //rewrites the file with new bubbles
+               if (err) throw err;
+                console.log("The data to append was append to the file data.json")
+            });
+            response.writeHead(200, {'Content-Type': 'text/html'});
             //response.write("some data testing")
-            response.end(myBubble);
+            response.end(entry); //sends back new bubble fort display
         });
     };
     app.generic = function(request, response) {
