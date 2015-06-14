@@ -1,5 +1,7 @@
 ##Bubble
 
+##What is Bubble?
+
 ##Why am I building Bubble?
 
 ##How is Bubble build?
