@@ -10,14 +10,15 @@ var handlers = (function() {
     };
 
     app["POST /add"] = function(request, response) {
-        var myFakeData = "";
-        request.on("data", function(data) {
-            myFakeData += data;
-            console.log("*********" + myFakeData);
+        var myBubble = "";
+        request.on("data", function(chunk) {
+            myBubble += chunk;
+            console.log("*********" + myBubble);
         });
         request.on("end", function() {
-            response.write("Show this in html - test");
-            response.end();
+            response.writeHead(200, {'Content-Type': 'text/plain'});
+            //response.write("some data testing")
+            response.end(myBubble);
         });
     };
     app.generic = function(request, response) {
