@@ -8,10 +8,17 @@ var handlers = (function() {
         //var bubblesLoad = require(__dirname + "/data.json");
         //var bubbles = fs.readFileSync(__dirname + "/data.json");
         //console.log(bubblesLoad);
-        response.write("GET all");
+        fs.readFile("data.json", function(err, data) {
+            if (err) throw err;
+            console.log("data to be send to all " + data);
+            //response.write(JSON.parse(data));
+            response.end(data);
+        });
+
+        //response.write("GET all");
         //response.end(JSON.stringify(bubbles));
         //response.end(JSON.stringify(bubblesLoad));
-        response.end();
+        //response.end();
     };
 
     app["POST /add"] = function(request, response) {
@@ -36,7 +43,7 @@ var handlers = (function() {
                if (err) throw err;
                 console.log("The data to append was append to the file data.json")
             });
-            response.writeHead(200, {'Content-Type': 'text/html'});
+            response.writeHead(200, {'Content-Type': 'text/plain'});
             //response.write("some data testing")
             //console.log(bubblesData.toString());
             response.end(JSON.stringify(entry)); //sends back new bubble for display
