@@ -5,6 +5,7 @@ function router(request, response) {
     "use strict";
     console.log(request.url);
     if (request.url === "/") {
+        console.log(request.url);
         fs.readFile(__dirname + "/index.html", "utf-8", function(err, data) {
            if (err) {
                response.write("Can not read index.html");
