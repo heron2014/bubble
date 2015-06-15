@@ -32,7 +32,7 @@
                 accessDOM += addBubble(bubbles[i]);
                 console.log("This is coming from get"  +accessDOM);
             }
-            $("#bubbles").prepend(accessDOM);
+            $("#bubbles").html(accessDOM);
         });
     };
 
